@@ -4,7 +4,8 @@
 <div class="row">
   <div class="span6 offset3">
     <%= form_for(:session, url: sessions_path) do |f| %>
-
+	  
+	  <!-- TODO: Configure to populate email if signin fails -->
       <%= f.label :email %>
       <%= f.text_field :email %>
 
