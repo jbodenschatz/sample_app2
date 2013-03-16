@@ -1,9 +1,7 @@
 class UsersController < ApplicationController
-  before_filter :signed_in_user,      only: [:index, :edit, :update, :destroy]
-  before_filter :correct_user,        only: [:edit, :update]
-  before_filter :admin_user,          only: :destroy
-  before_filter :already_signed_in,   only: [:new, :create]
-  before_filter :prevent_delete_self, only: :destroy
+  before_filter :signed_in_user, only: [:index, :edit, :update, :destroy]
+  before_filter :correct_user,   only: [:edit, :update]
+  before_filter :admin_user,     only: :destroy
   
   def new
 	@user = User.new
@@ -63,16 +61,5 @@ class UsersController < ApplicationController
 	
 	def admin_user
 	  redirect_to(root_path) unless current_user.admin?
-	end
-	
-	def already_signed_in
-	  if signed_in?
-	    redirect_to(root_path)
-	  end
-	end
-	
-	def prevent_delete_self
-	  @user = User.find(params[:id])
-	  redirect_to(root_path) if current_user?(@user)
 	end
 end
